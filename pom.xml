@@ -17,9 +17,16 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<vavr.version>0.10.2</vavr.version>
 	</properties>
 
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/io.vavr/vavr -->
+		<dependency>
+			<groupId>io.vavr</groupId>
+			<artifactId>vavr</artifactId>
+			<version>${vavr.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>de.flapdoodle.embed</groupId>
 			<artifactId>de.flapdoodle.embed.mongo</artifactId>

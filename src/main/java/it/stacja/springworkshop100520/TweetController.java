@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class TweetController {
 
-	private TweetRepository tweetRepository;
+	private TweetService tweetService;
 
 	@GetMapping
 	public Iterable<Tweet> getAll() {
-		return tweetRepository.findAll();
+		return tweetService.getAll();
 	}
 
 	@GetMapping(params = {"msg"})
 	public Iterable<Tweet> findByMsg(@RequestParam("msg") String msg) {
-		return tweetRepository.findByMsg(msg);
+		return tweetService.findByMsg(msg);
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void createTweet(@RequestBody Tweet tweet) {
-		tweetRepository.save(tweet);
+	public Tweet createTweet(@RequestBody Tweet tweet) {
+		return tweetService
+			.create(tweet)
+			.getOrElseThrow(() -> new ControllerDtoException("failed to create tweet"));
 	}
 }

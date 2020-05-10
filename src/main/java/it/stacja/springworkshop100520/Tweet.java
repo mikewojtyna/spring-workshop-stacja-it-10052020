@@ -13,4 +13,8 @@ public class Tweet {
 	private String msg;
 	@Id
 	private String id;
+
+	public Tweet(String msg) {
+		this.msg = msg;
+	}
 }
