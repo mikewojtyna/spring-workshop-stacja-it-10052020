@@ -12,8 +12,13 @@ public class TweetController {
 	private TweetRepository tweetRepository;
 
 	@GetMapping
-	public Iterable<Tweet> anything() {
+	public Iterable<Tweet> getAll() {
 		return tweetRepository.findAll();
+	}
+
+	@GetMapping(params = {"msg"})
+	public Iterable<Tweet> findByMsg(@RequestParam("msg") String msg) {
+		return tweetRepository.findByMsg(msg);
 	}
 
 	@PostMapping

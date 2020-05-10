@@ -61,4 +61,36 @@ class TweetApiSpecificationTest {
 			.andExpect(jsonPath("$", hasSize(1)))
 			.andExpect(jsonPath("$[0].msg", is("hello")));
 	}
+
+	// @formatter:off
+	@DisplayName(
+	        "given tweets with messages hi, hello and welcome in the database, " +
+	        "when GET on /api/tweets?msg=hello, " +
+	        "then only hello tweet is returned"
+	)
+	//@formatter:on
+	@Test
+	void searchByMsg() throws Exception {
+		String hi = "{ \"msg\": \"hi\" }";
+		String hello = "{ \"msg\": \"hello\" }";
+		String welcome = "{ \"msg\": \"welcome\" }";
+		mockMvc.perform(post("/api/tweets")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(hi));
+		mockMvc.perform(post("/api/tweets")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(hello));
+		mockMvc.perform(post("/api/tweets")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(welcome));
+
+		// when
+		mockMvc.perform(get("/api/tweets").param("msg", "hello"))
+
+		       // then
+		       .andExpect(jsonPath("$", hasSize(1)))
+		       .andExpect(jsonPath("$[0].msg", is("hello")));
+	}
+
+	// TODO: add test to find tweets ending with given suffix
 }
