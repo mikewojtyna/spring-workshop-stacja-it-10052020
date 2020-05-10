@@ -39,9 +39,9 @@ class TweetApiSpecificationTest {
 
 	// @formatter:off
 	@DisplayName(
-	        "given one tweet in application, " +
-	        "when GET on /api/tweets, " +
-	        "then a list containing single tweet is returned"
+	        "given hello tweet as json, " +
+	        "when POST on /api/tweets with hello tweet, " +
+	        "then this tweet is created"
 	)
 	//@formatter:on
 	@Test
