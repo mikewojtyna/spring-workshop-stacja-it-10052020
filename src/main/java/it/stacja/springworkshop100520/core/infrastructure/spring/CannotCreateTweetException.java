@@ -1,4 +1,4 @@
-package it.stacja.springworkshop100520;
+package it.stacja.springworkshop100520.core.infrastructure.spring;
 
 public class CannotCreateTweetException extends RuntimeException {
 

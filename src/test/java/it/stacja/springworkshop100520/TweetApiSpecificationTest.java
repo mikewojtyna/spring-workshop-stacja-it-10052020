@@ -1,6 +1,9 @@
 package it.stacja.springworkshop100520;
 
 import io.vavr.control.Either;
+import it.stacja.springworkshop100520.core.api.create.CreateTweetUseCase;
+import it.stacja.springworkshop100520.core.domain.Tweet;
+import it.stacja.springworkshop100520.core.infrastructure.spring.QueryTweetController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +23,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = TweetController.class)
+@WebMvcTest(controllers = QueryTweetController.class)
 class TweetApiSpecificationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 	@MockBean
-	private TweetService tweetService;
+	private CreateTweetUseCase tweetService;
 
 	// @formatter:off
 	@DisplayName(
@@ -95,7 +98,7 @@ class TweetApiSpecificationTest {
 	}
 
 	private Tweet tweetWithMsg(String msg) {
-		return new Tweet(msg);
+		return TestUtils.tweetWithMsg(msg);
 	}
 
 	// TODO: add test to find tweets ending with given suffix
