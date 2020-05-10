@@ -1,24 +1,24 @@
 package it.stacja.springworkshop100520;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/tweets")
+@AllArgsConstructor
 public class TweetController {
 
-	private Tweet tweet = new Tweet("msg");
+	private TweetRepository tweetRepository;
 
 	@GetMapping
-	public List<Tweet> anything() {
-		return List.of(tweet);
+	public Iterable<Tweet> anything() {
+		return tweetRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void createTweet(@RequestBody Tweet tweet) {
-		this.tweet = tweet;
+		tweetRepository.save(tweet);
 	}
 }
